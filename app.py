@@ -439,8 +439,7 @@ st.markdown("""
 # Sidebar
 with st.sidebar:
     st.header("⚙️ Settings")
-    
-    # API Key Configuration
+
     with st.expander("🔑 API Configuration", expanded=not GROQ_API_KEY):
         if GROQ_API_KEY:
             st.success("✅ API Key loaded from environment")
@@ -451,23 +450,20 @@ with st.sidebar:
                 type="password",
                 help="Enter your Groq API key"
             )
+
             if api_key:
                 st.success("✅ API Key provided")
             else:
                 st.warning("⚠️ Please enter your API key")
                 st.info("👉 [Get API Key](https://console.groq.com)")
-        
-        # Model selection
-        selected_model_name = st.selectbox(
-            "AI Model",
-            options=list(GROQ_MODELS.keys()),
-            index=0,
-            help="All models support both text and images"
-        )
-        
-        selected_model = GROQ_MODELS[selected_model_name]
-    
+
+        # 🔒 Force the LLama 3.3 70B model
+        selected_model_name = "llama-3.3-70b-versatile"
+        selected_model = selected_model_name
+        st.info(f"Model locked to **{selected_model_name}**")
+
     st.markdown("---")
+
     
     # Recovery Progress
     st.header("📊 Progress")
